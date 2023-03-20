@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- User interface for Search data -->
+        <record id="search_data_action" model="ir.actions.act_window">
+            <field name="name">search data</field>
+            <field name="res_model">search.data</field>
+            <field name="view_mode">form</field>
+        </record>
+        <!-- Form view -->
+        <record id="search_data_view_form" model="ir.ui.view">
+            <field name="name">search.data.form</field>
+            <field name="model">search.data</field>
+            <field name="arch" type="xml">
+                <form string="Search Form" create="0" write="0" edit="0">
+                    <!--Search field-->
+                    <field name="search" placeholder="Search..."
+                           style="margin-left: 450px; font-size:30px"/>
+                    <!--Select model-->
+                    <field name="search_model" placeholder="Select a model"
+                           style="font-size:30px"/>
+                    <!-- Button to search data on click call search_data() -->
+                    <button string="Search" name="search_data" type="object"
+                            class="oe_highlight" />
+                    <!-- Displays the search output -->
+                    <div class="data" style="margin-top: 100px;">
+                        <field name="data_ids" readonly="True"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Describes the fields to show on One2Many from search_model -->
+        <record id="search_model_view_tree" model="ir.ui.view">
+            <field name="name">search.model.tree</field>
+            <field name="model">search.model</field>
+            <field name="arch" type="xml">
+                <tree string="search model Tree">
+                    <field name="data_name"/>
+                    <field name="data_field_id"/>
+                </tree>
+            </field>
+        </record>
+        <!-- menu item which call ir.actions.act_window -->
+        <menuitem id="search_data_menu_root" name="Search Data"
+                  action="search_data_action"/>
+    </data>
+</odoo>
